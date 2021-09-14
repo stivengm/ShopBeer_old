@@ -1,5 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_beer/core/services/services.dart';
 import 'package:shop_beer/pages/dashboard/methods_pay.dart';
 import 'package:shop_beer/styles/app_style.dart';
 import 'package:shop_beer/widgets/text_widget.dart';
@@ -39,7 +41,13 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _body() {
+    Size _media = MediaQuery.of(context).size;
     return Container(
+      decoration: const BoxDecoration(
+        color: AppStyle.backgroundApp
+      ),
+      width: _media.width * 1.0,
+      height: _media.height * 1.0,
       child: Column(
         children: const [
           MethodsPay(),
@@ -47,5 +55,17 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
   }
+
+  Widget _header() {
+    return Container(
+      child: TextApp(
+        text: "Cerveza",
+        font: '',
+      ),
+    );
+  }
+
+  // Lista de todo.
+  // Cerveza, Aguardiente, Ron, Wiskey, Tequila, Gaseosa, Varios, Mecato
 
 }
