@@ -1,4 +1,6 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_beer/pages/dashboard/methods_pay.dart';
 import 'package:shop_beer/styles/app_style.dart';
 import 'package:shop_beer/widgets/text_widget.dart';
 
@@ -15,7 +17,22 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppStyle.appColor,
-        title: TextApp(text: 'ShopBeer', font: 'Curved', size: 34.0, fontW: FontWeight.bold ),
+        title: const TextApp(text: 'ShopBeer', font: 'Curved', size: 34.0, fontW: FontWeight.bold ),
+        actions: <Widget> [
+          Container(
+            margin: const EdgeInsets.only(right: AppStyle.edgeInsets15, top: AppStyle.edgeInsets5),
+            child: Badge(
+              badgeContent: const TextApp(text: "0", size: 15.0, font: 'Rubik', color: AppStyle.whiteColor,),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 35.0,
+                ),
+                onPressed: () => Navigator.pushNamed(context, 'cart'),
+              ),
+            ),
+          ),
+        ],
       ),
       body: _body(),
     );
@@ -23,7 +40,11 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _body() {
     return Container(
-      child: Text("Hola mundo"),
+      child: Column(
+        children: const [
+          MethodsPay(),
+        ],
+      ),
     );
   }
 

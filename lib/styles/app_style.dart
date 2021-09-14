@@ -16,6 +16,7 @@ class AppStyle {
   // Edges
   static const edgeInsets5 = 5.0;
   static const edgeInsets8 = 8.0;
+  static const edgeInsets10 = 10.0;
   static const edgeInsets12 = 12.0;
   static const edgeInsets15 = 15.0;
   static const edgeInsets18 = 18.0;
