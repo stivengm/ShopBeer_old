@@ -1,6 +1,6 @@
-# shop_beer
+# ShopBeer
 
-A new Flutter project.
+ShopBeer es una aplicación de venta de cervezas echa en Flutter versión 2.5.0 con null safety.
 
 ## Getting Started
 
