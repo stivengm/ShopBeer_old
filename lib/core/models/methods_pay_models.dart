@@ -42,11 +42,11 @@ class MethodsPayModel {
     };
 
     MethodsPayModel copy() => MethodsPayModel(
-      description: this.description,
-      img: this.img,
-      name: this.name,
-      typeMethodId: this.typeMethodId,
-      zona: this.zona,
-      id: this.id,
+      description: description,
+      img: img,
+      name: name,
+      typeMethodId: typeMethodId,
+      zona: zona,
+      id: id,
     );
 }

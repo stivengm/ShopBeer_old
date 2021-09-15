@@ -15,7 +15,7 @@ class MethodsPay extends StatelessWidget {
     if ( methodsServices.isLoading ) return const CircularProgressIndicator();
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppStyle.edgeInsets20, vertical: AppStyle.edgeInsets15),
+      padding: const EdgeInsets.symmetric(vertical: AppStyle.edgeInsets15),
       width: double.infinity,
       child: Column(
         children: [
