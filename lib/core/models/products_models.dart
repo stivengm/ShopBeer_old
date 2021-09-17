@@ -5,6 +5,7 @@ class ProductsModel {
         this.description,
         required this.img,
         required this.name,
+        required this.price,
         required this.typeProductId,
         this.id
     });
@@ -12,6 +13,7 @@ class ProductsModel {
     String? description;
     String img;
     String name;
+    String price;
     int typeProductId;
     String? id;
 
@@ -23,6 +25,7 @@ class ProductsModel {
         description: json["description"],
         img: json["img"],
         name: json["name"],
+        price: json["price"],
         typeProductId: json["typeProductId"],
     );
 
@@ -30,6 +33,7 @@ class ProductsModel {
         "description": description,
         "img": img,
         "name": name,
+        "price": price,
         "typeProductId": typeProductId,
     };
 }

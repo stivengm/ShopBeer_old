@@ -38,6 +38,12 @@ dependencies:
   another_flushbar: ^1.10.24 # https://pub.dev/packages/another_flushbar
   provider: ^6.0.0 # https://pub.dev/packages/provider
   http: ^0.13.3 # https://pub.dev/packages/http
+  sqflite: ^2.0.0+4 # https://pub.dev/packages/sqflite
+  path_provider: # https://pub.dev/packages/path_provider
+  mask_text_input_formatter: ^2.0.0 # https://pub.dev/packages/mask_text_input_formatter
+  intl: ^0.17.0 # https://pub.dev/packages/intl
+
+
 
 
 dev_dependencies:
