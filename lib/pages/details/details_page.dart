@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_beer/core/models/cart_models.dart';
 import 'package:shop_beer/core/providers/cart_list_provider.dart';
 import 'package:shop_beer/styles/app_style.dart';
 import 'package:shop_beer/widgets/header_widget.dart';
@@ -25,18 +24,17 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final data = Provider.of<CartListProvider>(context);
     data.getListDbCart();
-    
 
     final arguments = ModalRoute.of(context)!.settings.arguments as Map;
     if (arguments != null) {
       setState(() {
-        valuePay = int.parse(arguments['price']);
         valueProduct = int.parse(arguments['price']);
+        if (cantProd < 2) {
+          valuePay = int.parse(arguments['price']);
+        }
       });
-      print(arguments['name']);
     }
 
     Size _media = MediaQuery.of(context).size;
@@ -69,23 +67,27 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
             const SizedBox(height: AppStyle.edgeInsets10),
             Hero(
               tag: arguments['id'],
-              child: Image.network(arguments['img'], width: _media.width * 1.0, height: _media.height * .5, fit: BoxFit.contain,),
+              child: Image.network(arguments['img'], width: _media.width * 1.0, height: _media.height * .3, fit: BoxFit.contain,),
             ),
             TextApp(text: arguments['name'], size: 30.0, font: 'Rubik', fontW: FontWeight.bold, color: AppStyle.textColorHeader),
             TextApp(text: _formato(int.parse(arguments['price'])), size: 25.0, font: 'Rubik', fontW: FontWeight.bold, color: AppStyle.blackColor),
+            const SizedBox(height: 20.0),
             TextApp(text: arguments['description'], size: 20.0, font: 'Rubik', fontW: FontWeight.bold),
+            const SizedBox(height: 20.0),
             _controlsCount(),
-            SecundaryButton(text: 'Añadir al carrito', onPressed: () {
+            const SizedBox(height: 20.0),
+            SecundaryButton(text: 'Añadir al carrito', onPressed: () async {
               final cartListProvider = Provider.of<CartListProvider>(context, listen: false);
-              final register = cartListProvider.newArticleCart(arguments['name'], arguments['img'], '20000', '2');
-              NotificationsWidget(title: 'Se ha añadido ${arguments["name"]} al carrito', message: '').showNotificationSuccess(context);
+              final register = cartListProvider.newArticleCart(arguments['name'], arguments['img'], valuePay.toString(), cantProd.toString());
+              await NotificationsWidget(message: 'Se ha añadido ${arguments["name"]} al carrito').showNotificationSuccess(context);
               // if (register > 1) {
               // } else {
               //   const NotificationsWidget(title: 'Ha ocurrido un error al añadir al carrito el artículo', message: '').showNotificationError(context);
               // }
             }),
             const SizedBox(height: AppStyle.edgeInsets10),
-            PrimaryButton(text: 'Pagar', onPressed: () {})
+            PrimaryButton(text: 'Pagar', onPressed: () {}),
+            const SizedBox(height: AppStyle.edgeInsets10),
           ],
         ),
       ),
@@ -139,7 +141,9 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
               },
             ),
           ),
-          cantProd > 1 ? Text(_formato(valuePay)) : Container(),
+          Expanded(
+            child: cantProd > 1 ? TextApp(text: _formato(valuePay).toString(), font: 'Rubik', size: 25.0, fontW: FontWeight.bold, textAlign: TextAlign.center) :  Container(),
+          )
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:shop_beer/core/providers/cart_list_provider.dart';
 import 'package:shop_beer/core/services/services.dart';
 import 'package:shop_beer/pages/dashboard/methods_pay.dart';
 import 'package:shop_beer/styles/app_style.dart';
+import 'package:shop_beer/widgets/discount.dart';
 import 'package:shop_beer/widgets/header_widget.dart';
 import 'package:shop_beer/widgets/text_widget.dart';
 
@@ -56,6 +57,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             const MethodsPay(),
+            // DiscountWidget(),
             productsServices.productsCerveza.length != 0 ? Container(
               width: double.infinity,
               // color: Colors.red,

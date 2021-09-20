@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_beer/core/path/app_path.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_beer/core/providers/cart_list_provider.dart';
-import 'package:shop_beer/core/providers/db_provider.dart';
 import 'package:shop_beer/core/providers/ui_provider.dart';
 import 'package:shop_beer/core/services/services.dart';
 
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       initialRoute: 'dashboard',
       routes: routesApp(),
     );

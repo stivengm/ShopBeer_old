@@ -3,8 +3,6 @@ import 'package:shop_beer/core/models/cart_models.dart';
 import 'package:shop_beer/core/providers/db_provider.dart';
 
 class CartListProvider extends ChangeNotifier {
-
-
   List<CartModel> cart = [];
   // int id = 0;
 
@@ -21,6 +19,7 @@ class CartListProvider extends ChangeNotifier {
     final data = await DBProvider.db.getAllItemsCart();
     cart = [...data];
     notifyListeners();
+    return cart;
   }
 
   cargarScans() async {

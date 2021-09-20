@@ -25,9 +25,9 @@ class DBProvider {
 
   Future<Database> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    print(documentsDirectory.path);
+    // print(documentsDirectory.path);
     final path = join(documentsDirectory.path, 'CartTest.db');
-    print(path);
+    // print(path);
     
     // Crear base de datos
     return await openDatabase(path, version: 2, onOpen: (db) {},
