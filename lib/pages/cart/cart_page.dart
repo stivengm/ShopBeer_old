@@ -7,9 +7,11 @@ import 'package:shop_beer/core/providers/cart_list_provider.dart';
 import 'package:shop_beer/pages/cart/modal_edit.dart';
 import 'package:shop_beer/styles/app_style.dart';
 import 'package:shop_beer/widgets/header_widget.dart';
+import 'package:shop_beer/widgets/notification.dart';
 import 'package:shop_beer/widgets/primary_button.dart';
 import 'package:shop_beer/widgets/secundary_button.dart';
 import 'package:shop_beer/widgets/text_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({ Key? key }) : super(key: key);
@@ -20,7 +22,8 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   int total = 0;
-  int numberPhone = 3023458277;
+  String numberPhone = "+573023458277";
+  String _path = "https://wa.me/";
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +152,20 @@ class _CartPageState extends State<CartPage> {
               ],
             )
           ),
-          SecundaryButton(text: 'Pagar', onPressed: () { })
+          SecundaryButton(text: 'Pagar', onPressed: () async {
+            String articulos = "";
+            for (var i = 0; i < cartListProvider.cart.length; i++) {
+              var element = cartListProvider.cart[i];
+              articulos = articulos + 'Artículo: ${element.title}\n Cantidad: ${element.cantidad}\n Precio: ${_formato(int.parse(element.price))}\n★★★★★★★★★★★';
+            }
+            String message = '''
+            ★★★ShopBeer★★★
+            ${articulos.toString()}
+            TOTAL: ${_formato(total)}
+            ''';
+            print(message);
+            await canLaunch(_path) ? await launch(_path + numberPhone.toString() + '?text=' + message) : const NotificationsWidget(message: "No se ha podido abrir WhatsApp para hacer el pedido").showNotificationError(context);
+          })
         ],
       ) : _noInfo(),
     );
