@@ -6,6 +6,7 @@ class AppStyle {
   static const Color backgroundApp = Color(0xFFebebeb);
   static const Color whiteColor = Colors.white;
   static const Color blackColor = Colors.black;
+  static const Color blueColor = Color(0xFF007bff);
 
   // Text
   static const Color textColorHeader = Color(0xFF666666);

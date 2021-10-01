@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shop_beer/core/providers/cart_list_provider.dart';
+import 'package:shop_beer/pages/cart/modal_edit.dart';
 import 'package:shop_beer/styles/app_style.dart';
 import 'package:shop_beer/widgets/header_widget.dart';
+import 'package:shop_beer/widgets/primary_button.dart';
 import 'package:shop_beer/widgets/secundary_button.dart';
 import 'package:shop_beer/widgets/text_widget.dart';
 
@@ -80,7 +83,34 @@ class _CartPageState extends State<CartPage> {
                                 Icons.edit_outlined,
                                 color: AppStyle.appColor,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                showBarModalBottomSheet(
+                                  context: context,
+                                  expand: true,
+                                  animationCurve: Curves.elasticOut,
+                                  builder: ( _ ) => Container(
+                                    height: double.infinity,
+                                    color: Colors.white,
+                                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            child: ModalEditItemCart(
+                                              imagen: cartListProvider.cart[i].imagen,
+                                              nombre: cartListProvider.cart[i].title,
+                                            ),
+                                          ),
+                                          PrimaryButton(text: "Guardar", onPressed: () {}),
+                                          const SizedBox(height: 10.0),
+                                          SecundaryButton(text: "Cancelar", onPressed: () => Navigator.pop(context))
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                );
+                              },
                             ),
                             IconButton(
                               icon: const Icon(
@@ -103,7 +133,21 @@ class _CartPageState extends State<CartPage> {
           ),
           SizedBox(
             height: 30.0,
-            child: TextApp(text: 'TOTAL: \$ ${_formato(total)}', font: 'Rubik', size: 20.0, fontW: FontWeight.bold)
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextApp(text: 'TOTAL: \$ ${_formato(total)}', font: 'Rubik', size: 20.0, fontW: FontWeight.bold),
+                IconButton(
+                  icon: const Icon(
+                    Icons.help_outline_outlined,
+                    size: 30.0,
+                    color: AppStyle.blueColor,
+                  ),
+                  onPressed: () { },
+                ),
+              ],
+            )
           ),
           SecundaryButton(text: 'Pagar', onPressed: () { })
         ],
@@ -122,6 +166,7 @@ class _CartPageState extends State<CartPage> {
     for (var i = 0; i < cartListProvider.cart.length; i++) {
       total = total + int.parse(cartListProvider.cart[i].price);
     }
+    total = total + 1000;
     return total;
   }
 

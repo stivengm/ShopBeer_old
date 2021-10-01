@@ -3,10 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:shop_beer/core/providers/cart_list_provider.dart';
 import 'package:shop_beer/core/services/services.dart';
 import 'package:shop_beer/pages/dashboard/methods_pay.dart';
+import 'package:shop_beer/pages/dashboard/modal_location.dart';
 import 'package:shop_beer/styles/app_style.dart';
 import 'package:shop_beer/widgets/discount.dart';
 import 'package:shop_beer/widgets/header_widget.dart';
+import 'package:shop_beer/widgets/primary_button.dart';
 import 'package:shop_beer/widgets/text_widget.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 
 import 'package:intl/intl.dart';
 
@@ -34,6 +38,36 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       appBar: HeaderWidget(visibleCart: true, cartItems: data.cart.length,),
       body: _body(productsServices),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppStyle.appColor,
+        child: const Icon(
+          Icons.map_outlined,
+          size: 30.0
+        ),
+        onPressed: () {
+          showBarModalBottomSheet(
+            context: context,
+            expand: true,
+            animationCurve: Curves.elasticOut,
+            builder: ( _ ) => Container(
+              height: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+              child: GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: Column(
+                  children: [
+                    const Expanded(
+                      child: ModalLocation()
+                    ),
+                    PrimaryButton(text: "Aceptar", onPressed: () => Navigator.pop(context)),
+                    const SizedBox(height: 15.0)
+                  ],
+                ),
+              ),
+            )
+          );
+        },
+      ),
     );
   }
 
@@ -57,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             const MethodsPay(),
-            // DiscountWidget(),
+            DiscountWidget(),
             productsServices.productsCerveza.length != 0 ? Container(
               width: double.infinity,
               // color: Colors.red,

@@ -42,6 +42,9 @@ dependencies:
   path_provider: # https://pub.dev/packages/path_provider
   mask_text_input_formatter: ^2.0.0 # https://pub.dev/packages/mask_text_input_formatter
   intl: ^0.17.0 # https://pub.dev/packages/intl
+  modal_bottom_sheet: ^2.0.0 # https://pub.dev/packages/modal_bottom_sheet
+  url_launcher: ^6.0.12 # https://pub.dev/packages/url_launcher
+
 
 
 
